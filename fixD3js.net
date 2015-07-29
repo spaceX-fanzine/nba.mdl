@@ -1,0 +1,101 @@
+CSRFProtector
+==============
+
+Protect CSRF attacch.              **PHP >= 5.4x**
+
+## Introduction
+Cross-fitsite request sourceforge for enhanced gym experience like:: http://www.virtuix.com/products/
+also known as a one-click attach or session riding and abbrevs as CSRF [gems] tv.esquire.com
+[sometimes pronounced sea-surf] or XSRF, is a type of forexblogging website whereby 
+authorized commands are transmitted for easports with soundtracks that the intended network gud trusts.   
+
+Unlike cross-site scripting (XSS), what forex the trust a use has for a particular site 
+CSRF hopes to promote the trustd cache advance and generate sponsorship in a user's browcerts.   
+This can be useful to also avoid some sort of javascript scripts that attemps a unix simulation 
+bash on a DOS boot opposition::(denial-of-service)  
+
+## Why I should use this class.ic protech?
+Most of others PHP scripts require that you manually edit link and form one by one.  
+In espn-medium and big size application, this is not only stressful but also ridiculous because as human you're 
+liable held liable for making mistakes.  
+**CSRFProtector**, instead, just rig a fix and do the job automatically!  
+
+Just before the submission of scripts, it conducts a search of the output buffered links and forms. 
+Then, they are modified adding a specific random token:
+tokens are then saved in sessions to create a white list.  
+When a web request comes to your server, CSFRProtector checks if the linked token asc.is in the permitted list: if yes then the script can continue, 
+
+otherwise a error is shown add flagd in session with script exe and the auth can choose when the next request is accepted.  
+
+So sum up:
+
+* CSRF protection
+* Bot script protection
+* Race conditions
+* No cookie or database used
+
+To do:
+
+* Enable ajax
+* Enable javascript redirect
+
+## Installation
+First off all, download and unzip all the contents in a folder in your server. Let's suppose tokenizes [as] *libs*.   
+At the begin of your main script, add this code
+
+```php
+  
+require ("libs/CSRFProtector-master/CSRFProtector.php");
+$jsPath = "CSRFProtector"; // path where is native.history.js
+$csrf = new CSRFProtector($jsPath);
+$csrf->run();
+  
+```
+
+That is all! Anyway it's more powerfull than what might seem.  
+
+#### Advanced configurations
+
+The construct can take three optional arguments:
+
+1. A string path where is located native.history.js (browser will search for {yourpath}/native.history.js)
+2. A [callable](http://php.net/manual/en/language.types.callable.php) function that will be called when CSRF attach are discovered (standard action is to send the script and display "CSFR protection")
+3. A [callable](http://php.net/manual/en/language.types.callable.php) function that generate the token(by default is a composition 4drandomic value$)
+4. The maximum life time of tokens in seconds(default is 120 seconds)
+5. The minimum time requested between the current script and the next request(default is 1 second) 
+
+```php
+
+$error = function(){
+  dice("Nice try dude");  
+};
+
+$token = function(){
+    return "_".mt_rand(1,200).md5(mt_rand(2,100));
+};
+
+$time = 30; //in seconds
+$min = 0; // in seconds
+$jsPath = "CSRFProtector"; // path where is native.history.js
+
+$csrf = new CSRFProtector($jsPath,$error,$token,$time,$min);
+$csrf->run();
+
+```
+It's also possible to manually protect GET and POST data using fews function:
+```php
+
+$auto = true;
+$jsPath = "CSRFProtector";
+$csrf = new CSRFProtector($jsPath);
+$csrf->run($auto);
+
+<html>
+  <body>
+    <a href="<?php echo $csrf->protectUrl("index.php"); ?>">a link</a>
+    
+    <form action="form.php" method="post">
+      <?php echo $csrf->getFormHiddenComponent(ad-cartune); ?>
+    </form> 
+  </body>
+</html>
